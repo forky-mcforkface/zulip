@@ -41,6 +41,7 @@ import * as stream_popover from "./stream_popover";
 import * as stream_settings_ui from "./stream_settings_ui";
 import * as topic_zoom from "./topic_zoom";
 import * as ui from "./ui";
+import * as unread_ops from "./unread_ops";
 import {user_settings} from "./user_settings";
 
 function do_narrow_action(action) {
@@ -132,9 +133,11 @@ const keypress_mappings = {
     74: {name: "vim_page_down", message_view_only: true}, // 'J'
     75: {name: "vim_page_up", message_view_only: true}, // 'K'
     77: {name: "toggle_topic_mute", message_view_only: true}, // 'M'
+    78: {name: "resume_reading", message_view_only: true}, // 'N'
     80: {name: "narrow_private", message_view_only: true}, // 'P'
     82: {name: "respond_to_author", message_view_only: true}, // 'R'
     83: {name: "narrow_by_topic", message_view_only: true}, // 'S'
+    85: {name: "mark_unread", message_view_only: true}, // 'U'
     86: {name: "view_selected_stream", message_view_only: false}, // 'V'
     97: {name: "all_messages", message_view_only: true}, // 'a'
     99: {name: "compose", message_view_only: true}, // 'c'
@@ -806,6 +809,9 @@ export function process_hotkey(e, hotkey) {
         case "open_recent_topics":
             browser_history.go_to_location("#recent_topics");
             return true;
+        case "resume_reading":
+            unread_ops.resume_reading();
+            return true;
         case "all_messages":
             browser_history.go_to_location("#all_messages");
             return true;
@@ -939,6 +945,9 @@ export function process_hotkey(e, hotkey) {
             return true;
         case "toggle_message_collapse":
             condense.toggle_collapse(msg);
+            return true;
+        case "mark_unread":
+            unread_ops.mark_as_unread_from_here(msg.id);
             return true;
         case "compose_quote_reply": // > : respond to selected message with quote
             compose_actions.quote_and_reply({trigger: "hotkey"});
