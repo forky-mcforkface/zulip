@@ -392,6 +392,7 @@ test("first/prev/next", ({override, mock_template}) => {
                     user_circle_status: "translated: Active",
                     user_id: alice.user_id,
                     status_emoji_info: undefined,
+                    status_text: undefined,
                 });
                 break;
             case fred.user_id:
@@ -407,6 +408,7 @@ test("first/prev/next", ({override, mock_template}) => {
                     user_circle_status: "translated: Active",
                     faded: false,
                     status_emoji_info: undefined,
+                    status_text: undefined,
                 });
                 break;
             /* istanbul ignore next */
@@ -450,6 +452,7 @@ test("insert_one_user_into_empty_list", ({override, mock_template}) => {
             user_circle_status: "translated: Active",
             faded: true,
             status_emoji_info: undefined,
+            status_text: undefined,
         });
         assert.ok(html.startsWith("<li data-user-id="));
         return html;

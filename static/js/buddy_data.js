@@ -179,6 +179,7 @@ export function info_for(user_id) {
 
     const status_emoji_info = user_status.get_status_emoji(user_id);
     const user_circle_status = status_description(user_id);
+    const status_text = user_status.get_status_text(user_id);
 
     return {
         href: hash_util.pm_with_url(person.email),
@@ -190,6 +191,7 @@ export function info_for(user_id) {
         num_unread: get_num_unread(user_id),
         user_circle_class,
         user_circle_status,
+        status_text,
     };
 }
 
