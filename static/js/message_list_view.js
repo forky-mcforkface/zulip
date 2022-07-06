@@ -326,8 +326,35 @@ export class MessageListView {
 
         message_container.is_hidden = is_hidden;
         // Make sure the right thing happens if the message was edited to mention us.
-        message_container.contains_mention = message_container.msg.mentioned && !is_hidden;
+        if (!is_hidden && message_container.msg.mentioned) {
+            // Currently the API does not differentiate between a group mention and
+            // a user mention. For now, we parse the markdown to see if the message
+            // mentions the user.
+            let is_user_mention = false;
+            const $msg = $(message_container.msg.content);
+            $msg.find(".user-mention:not(.silent)").each(function () {
+                const user_id = rendered_markdown.get_user_id_for_mention_button(this);
+                if (user_id === "*") {
+                    return;
+                }
+                if (people.is_my_user_id(user_id)) {
+                    is_user_mention = true;
+                }
+            });
 
+            // If a message includes a user mention, even alongside a group/wildcard mention,
+            // color it as a user mention.
+            if (message_container.msg.mentioned_me_directly && is_user_mention) {
+                message_container.contains_direct_user_mention = true;
+                message_container.contains_group_mention = false;
+            } else {
+                message_container.contains_group_mention = true;
+                message_container.contains_direct_user_mention = false;
+            }
+        } else {
+            message_container.contains_group_mention = false;
+            message_container.contains_direct_user_mention = false;
+        }
         message_container.include_sender = message_container.include_sender && !is_hidden;
         if (is_revealed) {
             // If the message is to be revealed, we show the sender anyways, because the

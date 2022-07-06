@@ -22,6 +22,8 @@ $sidebar_top: calc($header_height + $header_padding_bottom);
 $left_sidebar_width: 270px;
 $right_sidebar_width: 250px;
 
+$private_message_background_light: hsla(45, 20%, 96%, 1);
+
 body,
 html {
     width: 100%;
@@ -1086,6 +1088,14 @@ td.pointer {
     cursor: pointer;
     vertical-align: top;
     border: none;
+    background: hsl(0, 0%, 100%);
+
+    &:hover {
+        /* Overlay a dark filter over messages on hover, by changing the background of the div over it. */
+        .messagebox-content {
+            background-color: hsla(0, 0%, 0%, 0.02);
+        }
+    }
 
     &:hover .message_controls,
     &:focus-within .message_controls,
@@ -1297,7 +1307,7 @@ td.pointer {
        private messages, mentions, and unread messages */
 
     .message-header-contents {
-        background-color: hsla(192, 19%, 75%, 0.2);
+        background-color: $private_message_background_light;
         box-shadow: inset 1px 1px 0 hsl(0, 0%, 88%);
     }
 }
@@ -1309,7 +1319,7 @@ td.pointer {
 
     .messagebox,
     .date_row {
-        background-color: hsla(192, 19%, 75%, 0.2);
+        background-color: $private_message_background_light;
         box-shadow: inset 2px 0 0 0 hsl(0, 0%, 27%), -1px 0 0 0 hsl(0, 0%, 27%);
     }
 }
@@ -1322,8 +1332,12 @@ td.pointer {
     background-color: hsl(0, 0%, 88%);
 }
 
-.mention .messagebox {
-    background-color: hsl(8, 94%, 94%);
+.direct_mention .messagebox {
+    background-color: hsl(240, 24%, 96%);
+}
+
+.group_mention .messagebox {
+    background-color: hsl(180, 13%, 95%);
 }
 
 .recipient_row .message_row:first-child .unread_marker {
