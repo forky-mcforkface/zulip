@@ -1678,7 +1678,8 @@ div.focused_table {
 }
 
 .messagebox-content {
-    padding: 4px 115px 1px 10px;
+    padding: 2px 115px 1px 10px;
+    margin-left: 2px; /* stream color bar */
 }
 
 .bookend {
