@@ -63,10 +63,16 @@ body.dark-theme {
     .messagebox {
         background-color: hsl(0, 0%, 14%);
 
+        .messagebox-content {
+            background-color: transparent;
+            transition: background-color 200ms;
+        }
+
         &:hover {
             /* Overlay a dark filter over messages on hover, by changing the background of the div over it. */
             .messagebox-content {
                 background-color: hsla(0, 0%, 0%, 0.2);
+                transition: none;
             }
         }
     }

@@ -1090,10 +1090,16 @@ td.pointer {
     border: none;
     background: hsl(0, 0%, 100%);
 
+    .messagebox-content {
+        background-color: transparent;
+        transition: background-color 200ms;
+    }
+
     &:hover {
         /* Overlay a dark filter over messages on hover, by changing the background of the div over it. */
         .messagebox-content {
             background-color: hsla(0, 0%, 0%, 0.02);
+            transition: none;
         }
     }
 
