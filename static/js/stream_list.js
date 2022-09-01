@@ -268,9 +268,16 @@ export function zoom_in_topics(options) {
             $elt.hide();
         }
     });
+
+    // we also need to hide the PM section and allow
+    // stream list to take complete left-sidebar in zoomedIn view.
+    $("#private_messages_container").hide();
 }
 
 export function zoom_out_topics() {
+    // Show PM section
+    $("#private_messages_container").show();
+
     // Show stream list titles and pinned stream splitter
     $(".stream-filters-label").each(function () {
         $(this).show();
@@ -600,7 +607,7 @@ export function set_event_handlers() {
         });
 
     // check for user scrolls on streams list for first time
-    ui.get_scroll_element($("#stream-filters-container")).on("scroll", function () {
+    ui.get_scroll_element($("#left_sidebar_scroll_container")).on("scroll", function () {
         has_scrolled = true;
         // remove listener once user has scrolled
         $(this).off("scroll");
@@ -608,7 +615,7 @@ export function set_event_handlers() {
 
     stream_cursor = new ListCursor({
         list: {
-            scroll_container_sel: "#stream-filters-container",
+            scroll_container_sel: "#left_sidebar_scroll_container",
             find_li(opts) {
                 const stream_id = opts.key;
                 const li = get_stream_li(stream_id);
@@ -722,7 +729,7 @@ export function toggle_filter_displayed(e) {
 }
 
 export function scroll_stream_into_view($stream_li) {
-    const $container = $("#stream-filters-container");
+    const $container = $("#left_sidebar_scroll_container");
 
     if ($stream_li.length !== 1) {
         blueslip.error("Invalid stream_li was passed in");

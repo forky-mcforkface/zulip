@@ -32,6 +32,7 @@ import * as notifications from "./notifications";
 import * as overlays from "./overlays";
 import {page_params} from "./page_params";
 import * as people from "./people";
+import * as pm_list from "./pm_list";
 import * as popovers from "./popovers";
 import * as reactions from "./reactions";
 import * as recent_topics_ui from "./recent_topics_ui";
@@ -735,6 +736,12 @@ export function initialize() {
     $(".streams_filter_icon").on("click", (e) => {
         e.stopPropagation();
         stream_list.toggle_filter_displayed(e);
+    });
+
+    $(".toggle_private_messages_section").on("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        pm_list.toggle_private_messages_section();
     });
 
     // WEBATHENA

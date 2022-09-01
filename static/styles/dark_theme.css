@@ -169,7 +169,9 @@ body.dark-theme {
     .column-left .left-sidebar,
     .column-right .right-sidebar,
     #subscription_overlay .right,
-    #settings_page .right {
+    #settings_page .right,
+    #streams_header,
+    #private_messages_section_header {
         background-color: hsl(212, 28%, 18%);
     }
 
@@ -248,6 +250,10 @@ body.dark-theme {
 
     .private-message .alert-msg {
         background-color: hsl(208, 17%, 29%);
+    }
+
+    .active_private_messages_section {
+        background-color: hsla(199, 33%, 46%, 0.2);
     }
 
     /* do not turn the .message_header .stream_label text dark on hover because they're
@@ -553,7 +559,8 @@ body.dark-theme {
     .starred-messages-sidebar-menu-icon:hover,
     .drafts-sidebar-menu-icon:hover,
     .stream-sidebar-menu-icon:hover,
-    .topic-sidebar-menu-icon:hover {
+    .topic-sidebar-menu-icon:hover,
+    #show_all_private_messages {
         color: hsl(0, 0%, 100%) !important;
     }
 
